@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+    <title>{{ app_name }}</title>
+    <style>
+        @font-face {
+            font-family: "default-font";
+            src: url(fonts/Gogh-ExtraBold.woff) format(woff);
+        }
+
+        .app-name {
+            display: flex;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            font-family: "default-font";
+        }
+
+        .data {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: start;
+            font-family: "default-font";
+        }
+
+        .data h5, data p {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-name">
+        <h1>{{ app_name }}</h1>
+    </div>
+    <div class="data">
+        <h5>Name: </h5>
+        <p>{{ name }}</p> 
+        <h5>Class: </h5>
+        <p>{{ class }}</p>
+    </div>
+</body>
+</html>
