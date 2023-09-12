@@ -20,3 +20,9 @@ class mainTest(TestCase):
         jeans = Item.objects.get(name="Blue Jeans")
         self.assertEqual(tshirt.cat(), "White T-shirt is a Top")
         self.assertEqual(jeans.cat(), "Blue Jeans is a Bottom")
+        self.assertEqual(tshirt.amount, 2)
+        self.assertEqual(jeans.category, "Bottom")
+
+    def test_app_url_is_exist(self):
+        response = Client().get("/main")
+        self.assertEqual(response.status_code, 301)
