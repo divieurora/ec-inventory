@@ -10,9 +10,6 @@ Setelah itu, saya melakukan inisiasi (git init), konfigurasi global dengan usern
 Setelah direktori dan repositori saya terhubung, saya mengaktifkan virtual environment agar proyek Django kali ini terisolasi dan tidak terganggu oleh program luar. Kemudian, di dalam direktori saya menambahkan depedencies yang akan mendukung proyek berjalan masing-masing. Depedencies yang saya gunakan mengikuti requirements.txt yang ada pada tutorial. Setelah depedencies diinstall, proyek Django akan terbuat ketika dijalankan perintah "django-admin startproject inventory .".
 Kemudian setelah proyek Django terbuat, muncul beberapa file seperti settings.py dan manage.py. Untuk keperluan deployment, ALLOWED_HOSTS pada settings.py saya isi ["*"] yang artinya mengizinkan semua host. Pada manage.py saya melakukan run server untuk melihat situasi proyek Django pada local host di peramban web. 
 
-<!-- Ketika sudah berjalan dengan normal, saya mengunggah proyek ke repositori yang tadi sudah dihubungkan.
-Namun sebelum mengunggah ke repositori, saya menambahkan berkas .gitignore seperti yang dicontohkan pada tutorial yang berguna untuk membatasi berkas lainnya agar proses unggah ke repositori tidak terganggu. Setelah itu saya melakukan git add, git commit, dan git push ke repositori GitHub. -->
-
 - Membuat aplikasi dengan nama main pada proyek tersebut
 Saya menjalankan perintah "python manage.py startapp main" di dalam direktori untuk memunculkan direktori baru bernama main dan berisi struktur awal aplikasi main. Kemudian menambahkan "main" pada settings.py di variabel INSTALLED_APPS dan secara otomatis aplikasi main sudah terdaftar di proyek inventory saya.
 
