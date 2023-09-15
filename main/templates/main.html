@@ -1,6 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <!DOCTYPE html>
 <head>
     <title>{{ app_name }}</title>
+    <meta charset="UTF-8" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
     <style>
         @font-face {
             font-family: "default-font";
@@ -38,5 +46,36 @@
         <h5>Class: </h5>
         <p>{{ class }}</p>
     </div>
+    <div class="message">
+        <p>Kamu menyimpan {{items|length}} item pada Eurora's Closet</p>
+    </div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Date Added</th>
+        </tr>
+    
+        {% for item in items %}
+            <tr>
+                <td>{{item.name}}</td>
+                <td>{{item.amount}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.category}}</td>
+                <td>{{item.date_added}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <br />
+    
+    <a href="{% url 'main:create_item' %}">
+        <button>
+            Add New Item
+        </button>
+    </a>
 </body>
 </html>
+{% endblock content %}
