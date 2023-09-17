@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load static %}
 {% block content %}
 <!DOCTYPE html>
 <head>
@@ -12,7 +13,7 @@
     <style>
         @font-face {
             font-family: "default-font";
-            src: url(fonts/Gogh-ExtraBold.woff) format(woff);
+            src: url('fonts/Gogh-ExtraBold.woff') format(woff);
         }
 
         .app-name {
@@ -34,6 +35,10 @@
         .data h5, data p {
             margin: 5px;
         }
+
+        table, th, td{
+            border: 1px;
+        }
     </style>
 </head>
 <body>
@@ -49,7 +54,7 @@
     <div class="message">
         <p>Kamu menyimpan {{items|length}} item pada Eurora's Closet</p>
     </div>
-    <table>
+    <table class="table">
         <tr>
             <th>Name</th>
             <th>Amount</th>
