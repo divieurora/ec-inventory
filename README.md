@@ -187,18 +187,75 @@ Adaptable Link:
 
 3. Apa itu _cookies_ dalam konteks aplikasi web, dan bagaimana Django menggunakan _cookies_ untuk mengelola data sesi pengguna?
 
-    **
+    _Cookies_ adalah penyimpanan data _client_ yang sifatnya sementara (hanya tersimpan ketika pengguna sedang melakukan interaksi di dalam aplikasi web). Dalam Django, _cookies_ dikelola dengan struktur seperti map yang terdiri dari key dan value berupa user dan data yang disimpan. Untuk menjaga keamanan data, pada Django juga terdapat _expiration date_ sehingga ketika pengguna sudah keluar dari aplikasi web, data-data pengguna juga akan dinonaktifkan.
 
 4. Apakah penggunaan _cookies_ aman secara _default_ dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
 
-    **
+    _Cookies_ disimpan pada sisi _client_, sehingga keamanan sebenarnya tergantung pada _browser_ milik _client_. _Cookies_ juga dapat dilihat secara langsung oleh pengguna sehingga sebenarnya tidak aman jika digunakan untuk menyimpan sesuatu yang sifatnya _private_. 
+
+    Beberapa resiko potensial yang harus diwaspadai terhadap keamanan _cookies_ adalah adanya ___Cookie Theft___ yaitu pencurian _cookies_ karena mendapat akses ilegal ke _cookies_ pengguna. Umumnya menyerang informasi pengguna yang bersifat _private_ seperti ID, _validation token_, dan lain-lain sehingga sesi pengguna dapat diambil alih.
 
 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
     - Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
 
+        Untuk mengimplementasikan fungsi registrasi, login, dan logout, saya menambahkan beberapa fitur django ke views.py yaitu:
+
+        ```
+        from django.shortcuts import redirect
+        from django.contrib.auth.forms import UserCreationForm
+        from django.contrib import messages  
+        from django.contrib.auth import authenticate, login, logout
+        from django.contrib.auth.decorators import login_required
+        ```
+        Setelah mengimpor, saya juga mendefinisikan masing-masing functionnya, seperti `register(request)`, `login_user(request)`, dan `logout_user(request)`. Tidak lupa saya juga mengatur bagian `login_required` serta menghubungkan fungsi login dan logout pada cookie.
+        
+        Kemudian saya menyambungkannya ke file urls.py untuk setiap path register, login, dan logout.
+
     - Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
+
+        Untuk menguji coba, saya menjalankan program pada localhost dan memanfaatkan fungsi register untuk mendaftarkan 2 akun baru. Kemudian, untuk masing-masing akun yang telah dibuat, saya menerapkan fungsi login, menambahkan masing-masing 3 _dummy_ data, dan menerapkan fungsi logout.
 
     - Menghubungkan model Item dengan User.
 
+        Dalam menghubungkan model Item dengan User, pertama-tama yang saya lakukan adalah mengimpor `from django.contrib.auth.models import User` ke dalam models.py. Setelah itu, pada model Item saya tambahkan kode:
+        `user = models.ForeignKey(User, on_delete=models.CASCADE)` serta mengubah kode di views.py untuk `create_item` dan `show_main` sebagai berikut:
+
+        ```
+        @login_required(login_url='/login')
+        def show_main(request):
+        items = Item.objects.all()
+
+        last_login = request.COOKIES.get('last_login', 'Not available')    
+
+        context = {
+            'app_name': "EURORA'S CLOSET",
+            'name': request.user.username,
+            'class': 'PBP A',
+            'items': items,
+            'last_login': last_login,
+        }
+
+        return render(request, "main.html", context)
+
+        def create_item(request):
+        form = ItemForm(request.POST or None)
+
+        if form.is_valid() and request.method == "POST":
+            item = form.save(commit=False)
+            item.user = request.user
+            item.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
+
+        context = {'form': form}
+        return render(request, "create_item.html", context)
+        ```
+        Maka dengan ini, sudah terhubung dengan _cookie_ dan _context_ akan disesuaikan ke dalam HTML file. Kemudian terakhir adalah melakukan _migrations_ untuk mengatur perubahan. 
+
     - Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
+
+        Karena sebelumnya, saya sudah mengatur _cookie_ maka informasi pengguna yang sedang _logged in_ dan _last login_ hanya perlu diatur pada file HTML dengan menambahkan:
+        ```
+        <h5>Sesi terakhir login: {{ last_login }}</h5>
+        ```
+
