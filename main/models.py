@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Item(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     CATEGORY_CHOICES = (
         ('Top', 'Top'),
         ('Bottom', 'Bottom'),

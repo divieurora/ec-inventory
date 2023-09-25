@@ -169,3 +169,36 @@ Adaptable Link:
 #### JSON by ID
 
 ![JSON-ID](image/json-id-postman.png)
+
+# Tugas 4
+1. Apa itu Django `UserCreationForm`, dan jelaskan apa kelebihan dan kekurangannya?
+
+    Django `UserCreationForm` adalah sebuah `form` Django yang digunakan untuk create user baru yang dapat digunakan dalam web app. Umumnya, `UserCreationForm` punya 3 field yaitu: `username`, `password1`, dan `password2`. Field `password2` biasanya digunakan untuk mengonfirmasi password sebelumya.
+    
+    Kelebihan `UserCreationForm`: Merupakan default `form` dari Django sehingga pengembang Django tidak perlu membuat model form lagi dan dapat langsung disimpan di database. Tampilan `UserCreationForm` juga dapat dilakukan _customization_ sehingga dapat disesuaikan dengan tampilan web app.
+    
+    Kekurangan `UserCreationForm`:
+    Mungkin untuk penambahan field lain dan perubahan tampilan harus dilakukan perubahan sendiri.
+
+
+2. Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+
+    Autentikasi adalah proses verifikasi siapa user yang berusaha menggunakan akses. Sedangkan otorisasi adalah proses verifikasi user yang telah diautentikasi apakah dapat mengakses suatu sistem. Dalam konteks Django, keduanya penting karena berhubungan satu sama lain dalam mengatur administrasi database. 
+
+3. Apa itu _cookies_ dalam konteks aplikasi web, dan bagaimana Django menggunakan _cookies_ untuk mengelola data sesi pengguna?
+
+    **
+
+4. Apakah penggunaan _cookies_ aman secara _default_ dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+
+    **
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+    - Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
+
+    - Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
+
+    - Menghubungkan model Item dengan User.
+
+    - Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
