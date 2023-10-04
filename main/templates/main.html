@@ -3,7 +3,11 @@
 {% load static %}
 {% block content %}
 <head>
-
+    <style>
+        .card-container .card:last-child, .last-item-card .card {
+            background-color: rgb(73, 67, 62); /* contoh warna merah muda */
+        }
+    </style>
 </head>
 <body>
     <div class="container text-center mt-5">
@@ -62,24 +66,27 @@
     <div class="container">
         <div class="row">
             {% for item in items %}
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    {% if item.image %}
-                    <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ item.name }}</h5>
-                        <p class="card-text">
-                            <strong>Amount:</strong> {{ item.amount }}<br>
-                            <strong>Description:</strong> {{ item.description }}<br>
-                            <strong>Category:</strong> {{ item.category }}
-                        </p>
-                        <!-- Optionally, add some action buttons or links -->
-                        <a href="{% url 'main:edit_item' item.pk %}" class="btn btn-custom">Edit</a>
-                        <a href="{% url 'main:delete' item.pk %}" onclick="return confirm('Are you sure?');" class="btn btn-custom">Delete</a>
+                {% if forloop.last %}
+                <div class="col-md-4 mb-4 last-item-card">
+                {% else %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if item.image %}
+                        <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name }}</h5>
+                            <p class="card-text">
+                                <strong>Amount:</strong> {{ item.amount }}<br>
+                                <strong>Description:</strong> {{ item.description }}<br>
+                                <strong>Category:</strong> {{ item.category }}
+                            </p>
+                            <!-- Optionally, add some action buttons or links -->
+                            <a href="{% url 'main:edit_item' item.pk %}" class="btn btn-custom">Edit</a>
+                            <a href="{% url 'main:delete' item.pk %}" onclick="return confirm('Are you sure?');" class="btn btn-custom">Delete</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
     </div>
