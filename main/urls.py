@@ -2,6 +2,7 @@ from django.urls import path
 from main.views import show_main, create_item, show_xml, show_json, show_xml_by_id, show_json_by_id
 from main.views import register, login_user, logout_user
 from main.views import increase_amount, decrease_amount, delete
+from main.views import edit_item
 
 app_name = 'main'
 
@@ -18,4 +19,5 @@ urlpatterns = [
     path('item/<int:id>/increase/', increase_amount, name='increase_amount'),
     path('item/<int:id>/decrease/', decrease_amount, name='decrease_amount'),
     path('item/<int:id>/delete/', delete, name='delete'),
+    path('edit-product/<int:id>', edit_item, name='edit_item'),
 ]

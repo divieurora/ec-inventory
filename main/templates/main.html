@@ -2,59 +2,21 @@
 
 {% load static %}
 {% block content %}
-<!DOCTYPE html>
 <head>
-    <title>{{ app_name }}</title>
-    <meta charset="UTF-8" />
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    />
-    <style>
-        @font-face {
-        font-family: "default-font";
-        src: url('fonts/Gogh-ExtraBold.woff') format(woff);            
-        }
 
-        .app-name {
-            display: flex;
-            position: relative;
-            justify-content: center;
-            align-items: center;
-            font-family: "default-font";
-        }
-
-        .data {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: start;
-            font-family: "default-font";
-        }
-
-        .data h5, data p {
-            margin: 5px;
-        }
-
-        table, th, td{
-            border: 1px;
-        }
-    </style>
 </head>
 <body>
-    <div class="app-name">
-        <h1>{{ app_name }}</h1>
+    <div class="container text-center mt-5">
+        <h2>Hi, {{ name }}!</h2>
+        <p>You have {{ items|length }} items in your closet.</p>
+    
+        <div class="my-4">
+            <a href="{% url 'main:create_item' %}" class="btn btn-custom btn-lg">
+                Add New Item
+            </a>
+        </div>
     </div>
-    <div class="data">
-        <h5>Name: </h5>
-        <p>{{ name }}</p> 
-        <!-- <h5>Class: </h5>
-        <p>{{ class }}</p> -->
-    </div>
-    <div class="message">
-        <p>Kamu menyimpan {{ items|length }} item pada Eurora's Closet</p>
-    </div>
-    <table class="table">
+    <!-- <table class="table">
         <tr>
             <th>Name</th>
             <th>Amount</th>
@@ -62,6 +24,7 @@
             <th>Description</th>
             <th>Category</th>
             <th>Date Added</th>
+            <th></th>
             <th></th>
         </tr>
     
@@ -85,23 +48,48 @@
                         <button>Delete</button>
                     </a>
                 </td>
+                <td>
+                    <a href="{% url 'main:edit_item' item.pk %}">
+                        <button>
+                            Edit
+                        </button>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
-    </table>
+    </table> -->
+
+    <div class="container">
+        <div class="row">
+            {% for item in items %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <p class="card-text">
+                            <strong>Amount:</strong> {{ item.amount }}<br>
+                            <strong>Description:</strong> {{ item.description }}<br>
+                            <strong>Category:</strong> {{ item.category }}
+                        </p>
+                        <!-- Optionally, add some action buttons or links -->
+                        <a href="{% url 'main:edit_item' item.pk %}" class="btn btn-custom">Edit</a>
+                        <a href="{% url 'main:delete' item.pk %}" onclick="return confirm('Are you sure?');" class="btn btn-custom">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
     
-    <br />
-    
-    <a href="{% url 'main:create_item' %}">
-        <button>
-            Add New Item
-        </button>
-    </a>
-    <h5>Sesi terakhir login: {{ last_login }}</h5>
-    <a href="{% url 'main:logout' %}">
-        <button>
-            Logout
-        </button>
-    </a>
+    <footer class="footer" style="background-color: rgb(246, 240, 234);">
+        <div class="container text-center">
+            <p>Sesi terakhir login: {{ last_login }}</p>
+        </div>
+    </footer>
+
 </body>
 </html>
 {% endblock content %}

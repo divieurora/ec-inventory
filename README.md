@@ -259,3 +259,66 @@ Adaptable Link:
         <h5>Sesi terakhir login: {{ last_login }}</h5>
         ```
 
+# Tugas 5
+ 1. Jelaskan manfaat dari setiap _element selector_ dan kapan waktu yang tepat untuk menggunakannya.
+
+    _Elemen selector_ adalah sebuah instruksi CSS yang mengelompokkan elemen sehingga elemen tersebut memiliki _style_ yang sama. Contohnya:
+    ```
+    h5 {
+        text-align: center;
+        color: yellow;
+    }
+    ```
+    Sehingga, dengan pengaturan elemen, semua elemen h5 akan memiliki _center text alignment_ dan warna _yellow_.
+
+    _Elemen selector_ akan tepat digunakan ketika ingin membuat spesifikasi untuk suatu elemen agar dalam 1 file html, semua elemen tersebut memiliki _style_ yang sama dan konsisten. Contohnya adalah ketika ingin mengatur warna dan _font_ untuk _heading_ tertentu.
+    
+ 2. Jelaskan HTML5 Tag yang kamu ketahui.
+
+    Berikut adalah beberapa HTML5 Tag yang saya ketahui:
+    ```
+    - <a> : untuk mengarahkan ke suatu tautan
+    - <body> : untuk mendefinisikan body dari file
+    - <br> : untuk membuat line break
+    - <button> : untuk membuat sebuah tombol yang dapat diclick
+    - <div> : untuk mendefinisikan per-bagian
+    - <head> : untuk mendefinisikan heading dari file
+    - <hr> : untuk membuat sebuah garis horizontal
+    - <img> : untuk input sebuah foto
+    - <li> : untuk membuat daftar item
+    - <table> : untuk membuat table data, ada juga yang termasuk di dalamnya seperti <tr>, <th>, <td>
+    - dan masih banyak tag lainnya.
+    ```
+
+ 3. Jelaskan perbedaan antara margin dan padding.
+
+    Margin adalah area kosong pada bagian terluar sebuah file. Margin dihitung dari bagian terluar file dan bentuknya adalah transparan. 
+    
+    Sedangkan padding adalah area kosong pada bagian luar sebuah konten. Padding dihitung dari bagian terluar konten dan bentuknya juga transparan. 
+
+    Perbedaan utamanya terletak pada posisinya yaitu, margin relatif ada di bagian paling luar sedangkan padding menyelimuti sebuah konten.
+
+ 4. Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+
+    | Bootstrap | Tailwind | 
+    | :--------: | :--------: |
+    | Bootstrap memiliki komponen-komponen design yang siap digunakan | Tailwind memiliki design yang bisa dikombinasikan dengan kelas utilitas |
+    | Ukuran file CSS Bootstrap umumnya lebih besar | Ukuran file CSS Tailwind umumnya lebih kecil dibandingkan Bootstrap |
+    | Penggunaan Bootstrap akan menyeragamkan design website | Penggunaan Tailwind dapat disesuaikan dengan setiap project karena lebih fleksibel |
+    | Bootstrap kerap digunakan untuk pemula | Tailwind perlu dipelajari lebih lanjut |
+
+    Bootstrap tepat untuk digunakan bagi pemula yang ingin hasil maksimal tanpa perlu banyak menyesuaikan diri dengan kesulitan menggunakan CSS, karena bootstrap sudah menyediakan semua komponen CSS yang siap digunakan. Selain itu, _design_ bootstrap cenderung lebih konsisten.
+
+    Sedangkan Tailwind tepat digunakan bagi pengembang web yang ingin memiliki spesifikasi tersendiri bagi _design_ webnya tersebut. Tailwind juga menyediakan kelas _utility_ untuk _design-design_ yang lebih kompleks.
+
+ 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+ -  Kustomisasi halaman login, register, dan tambah inventori semenarik mungkin.
+
+    Pada halaman login dan register, saya membuat halaman tersebut lebih menarik dengan mengatur _alignment_ untuk _form_ _username_ dan _password_ rata tengah sehingga lebih nyaman dilihat.
+
+    Sedangkan untuk file _main_ saya membuat _design_ yang sesuai dengan _branding_ dan karakteristik yang saya ingin kembangkan sesuai aplikasi saya.
+ 
+ - Kustomisasi halaman daftar inventori menjadi lebih berwarna maupun menggunakan apporach lain seperti menggunakan Card.
+
+    Saya menggunakan bootstrap CSS untuk membuat _item_ pada inventori saya dengan Card. Saya membuat Card untuk setiap _item_ yang diinput pada halaman daftar inventori. Card ini akan sekaligus menggantikan tabel yang sebelumnya menampilkan daftar item.

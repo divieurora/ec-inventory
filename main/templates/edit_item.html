@@ -1,16 +1,10 @@
-{% extends 'base.html' %} 
-<head>
-    <style>
-        textarea.form-control {
-            height: 100px;
-        }
-    </style>
-</head>
+{% extends 'base.html' %}
+
 {% block content %}
 <div class="container d-flex justify-content-center align-items-center" style="height: 100vh; color: rgb(132, 119, 106);">
     <div class="col-md-6">
-        <h1 class="text-center mb-4">Add New Item</h1>
-        <form method="POST"enctype="multipart/form-data" >
+        <h1 class="text-center mb-4">Edit Item</h1>
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in form %}
             <div class="form-group">
@@ -26,14 +20,14 @@
                 {% elif field.field.widget.input_type == "file" %}
                 <label for="{{ field.auto_id }}" class="btn btn-custom">Choose File</label>
                 <input type="file" name="{{ field.name }}" id="{{ field.auto_id }}" class="d-none"> 
-                <span id="{{ field.auto_id }}-filename" class="ml-2">No file chosen</span>
+                <span id="{{ field.auto_id }}-filename" class="ml-2">No file chosen</span>                
                 {% else %}
                     <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="{{ field.auto_id }}" class="form-control" value="{{ field.value|default:'' }}">
                 {% endif %}
             </div>
             {% endfor %}
             <div class="form-group text-center mt-3">
-                <input type="submit" value="Add Item" class="btn btn-custom"/>
+                <input type="submit" value="Edit Item" class="btn btn-custom"/>
             </div>
         </form>
         <div class="d-flex justify-content-center align-items-center" style="height: 10vh; padding: 50px;">
@@ -56,5 +50,4 @@
         }
     });
 </script>
-
 {% endblock %}
