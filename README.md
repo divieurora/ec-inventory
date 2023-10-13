@@ -324,6 +324,8 @@ Adaptable Link:
     Saya menggunakan bootstrap CSS untuk membuat _item_ pada inventori saya dengan Card. Saya membuat Card untuk setiap _item_ yang diinput pada halaman daftar inventori. Card ini akan sekaligus menggantikan tabel yang sebelumnya menampilkan daftar item.
 
 # Tugas 6
+### Link URL Tugas: [Eurora's Closet](http://lidwina-eurora-tugas.pbp.cs.ui.ac.id)
+
 1. Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.
 
     _Asynchronous programming_ artinya setiap eksekusi _task_ dapat dilakukan tanpa perlu menunggu _task_ sebelumnya selesai. _Asynchronous programming_ memungkinkan eksekusi secara paralel dan meningkatkan responsivitas program dengan waktu yang lebih singkat.
