@@ -24,29 +24,26 @@
 
     <div class="container">
         <div class="row" id="items_container">
+            Total items: {{ items|length }}
             {% for item in items %}
-                {% if forloop.last %}
-                <div class="col-md-4 mb-4 last-item-card">
-                {% else %}
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        {% if item.image %}
-                        <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
-                        {% endif %}
-                        <div class="card-body">
-                            <h5 class="card-title">{{ item.name }}</h5>
-                            <p class="card-text">
-                                <strong>Amount:</strong> {{ item.amount }}<br>
-                                <strong>Description:</strong> {{ item.description }}<br>
-                                <strong>Category:</strong> {{ item.category }}
-                            </p>
-                            <a href="{% url 'main:edit_item' item.pk %}" class="btn btn-custom">Edit</a>
-                            <a href="{% url 'main:delete' item.pk %}" onclick="return confirm('Are you sure?');" class="btn btn-custom">Delete</a>
-                        </div>
+            <div class="col-md-4 mb-4">
+                <div class="card {% if forloop.last %}last-item-card{% endif %}">
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <p class="card-text">
+                            <strong>Amount:</strong> {{ item.amount }}<br>
+                            <strong>Description:</strong> {{ item.description }}<br>
+                            <strong>Category:</strong> {{ item.category }}<br>
+                        </p>
+                        <a href="{% url 'main:edit_item' item.pk %}" class="btn btn-custom">Edit</a>
+                        <a href="{% url 'main:delete' item.pk %}" onclick="return confirm('Are you sure?');" class="btn btn-custom">Delete</a>
                     </div>
-                {% endif %}
                 </div>
-            {% endfor %}
+            </div>
+        {% endfor %}        
         </div>
     </div>
 

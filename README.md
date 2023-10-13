@@ -326,18 +326,54 @@ Adaptable Link:
 # Tugas 6
 1. Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.
 
+    _Asynchronous programming_ artinya setiap eksekusi _task_ dapat dilakukan tanpa perlu menunggu _task_ sebelumnya selesai. _Asynchronous programming_ memungkinkan eksekusi secara paralel dan meningkatkan responsivitas program dengan waktu yang lebih singkat.
 
+    Sedangkan _synchronous programming_ artinya setiap eksekusi _task_ harus berurutan, yakni setiap _task_ yang akan dieksekusi harus menyelesaikan _task_ sebelumnya dahulu. _Synchronous programming_ membuat _flow_ program menjadi lebih mudah dipahami karena linear, namun jika dibandingkan dengan _asynchronous programming_ dapat memakan waktu yang lebih lama.
 
 2. Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.
 
+    Paradigma _event-driven programming_ mengacu pada waktu sebuah task dieksekusi yang ditentukan oleh suatu _event_ tertentu. Program dengan _event-driven_ dapat mengeksekusi sebuah task secara langsung tanpa perlu menjalankan kode-kode di urutan seelumnya. Dalam _event-driven programming_ terdapat _event handler_ yang berfungsi untuk mendefinisikan respons program ketika _event_ terjadi.
 
+    Contoh penggunaannya dalam JavaScript dan AJAX pada project saya adalah:
+    `document.getElementById("saveItemButton").addEventListener("click", addItem)`
+    Kode di atas berarti bahwa ketika _button_ Save Item di-_click_, maka Item akan bertambah sesuai dengan fungsi `addItem`.
 
 3. Jelaskan penerapan asynchronous programming pada AJAX.
 
-
+    AJAX merupakan singkatan dari Asynchronous JavaScript And XML, yang artinya AJAX menggunakan _asynchronous programming_ untuk dapat bekerja. Untuk memberi tanda bahwa sebuah fungsi transfer data menggunakan AJAX beroperasi secara _asynchronous programming_, maka fungsi tersebut dapat menggunakan kata kunci `async`.
+    
+    Kemudian, untuk memastikan bahwa kode program lainnya akan tetap berjalan dengan lancar sementara server mengolah _input_ dan mengirimkan _output_ AJAX, maka dapat digunakan `fetch()` untuk melakukan HTTP GET Request dan Await. Ketika respons yang sudah selesai dieksekusi sudah diterima, maka kemudian fungsi-fungsi yang sudah didefinisikan pada JavaScript akan diproses dalam program.
 
 4. Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada library jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.
 
+    | Fetch API | Library jQuery | 
+    | :--------: | :--------: |
+    | Tidak memerlukan library tambahan | Merupakan sebuah library tambahan yang perlu diinstall terlebih dahulu |
+    | Menangani respons dan _error_ dengan lebih mudah dibaca karena menggunakan _promises_ | Terdapat versi jQuery yang masih menggunakan _callback_, yang terbilang cukup sulit dibandingkan _promises_ |
+    | Instruksi yang ada lebih sederhana | Memiliki lebih banyak _plugin_ yang memudahkan beberapa tugas |
+    | Cocok untuk _browser_ modern, namun tidak untuk beberapa _browser_ lama | Lebih _compatible_ untuk semua _browser_ (_cross-browser_) karena dapat menyesuaikan perbedaan pada tiap _browser_ |
 
+    Menurut saya, Fetch API dan Library jQuery memiliki kelebihan dan kekurangannya masing-masing. Namun, untuk _project_ sederhana seperti _inventory_ ini lebih mudah untuk menerapkan AJAX dengan Fetch API. Selain tidak memerlukan _library_ eksternal, secara khusus _project_ yang sedang dibuat merupakan _project_ yang didukung pada _browser_ modern dan tidak memerlukan terlalu banyak fitur lain pada jQuery.
 
 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+- Mengubah AJAX GET
+
+    Dalam mengimplementasikan AJAX GET, pertama-tama saya membuat fungsi `get_item_json` yang tugasnya adalah untuk melakukan _fetch_ dari berkas main.html, mengambil data input item dari _user_, kemudian mengembalikan data tersebut menggunakan format JSON. Saya juga melakukan _routing_ fungsi tersebut ke dalam views.py.
+
+    Ketika `get_item_json` dieksekusi, harapan saya adalah data pada daftar card akan ter-_update_. Untuk meng-_update_ tampilan card, saya membuat `async function refreshItems()` yang akan me-_refresh_ Item secara otomatis ketika dieksekusi.
+
+- Mengubah AJAX POST
+
+    Dalam mengimplementasikan AJAX POST, saya memanfaatkan tutorial yaitu membuat sebuah _button_ yang akan membuka sebuah modal. Modal yang ada pada tutorial saya modifikasi sesuai dengan _models_ yang digunakan dalam _project_ saya. Namun, sebelumnya saya membuat fungsi `add_item_ajax` untuk menambahkan Item baru dan menyimpan Item tersebut ke dalam _database_. Tidak lupa, saya melakukan _routing_ fungsi tersebut ke dalam views.py.
+
+    Selain itu, dalam berkas main.html saya juga menambahkan `async function addItem()` yang berfungsi untuk melakukan fetch dan mengirimkan HTTP Request sesuai dengan paradigma _event-driven programming_ yang akan dieksekusi ketika button pada modal di-_click_.
+
+- Melakukan perintah `collectstatic`
+
+    Untuk melakukan `collectstatic`, saya menambahkan kode di bawah ini pada berkas settings.py:
+    ```
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    ```
+
+    Kemudian, saya menjalankan `python manage.py collectstatic` di terminal untuk mengumpulkan _file static_ dari setiap aplikasi saya.

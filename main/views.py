@@ -16,7 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 @login_required(login_url='/login')
 def show_main(request):
-    items = Item.objects.all()
+    items = Item.objects.filter(user=request.user)
 
     last_login = request.COOKIES.get('last_login', 'Not available')    
 
