@@ -30,7 +30,7 @@ def show_main(request):
 
     return render(request, "main.html", context)
 
-def create_item(request):
+def create_items(request):
     form = ItemForm(request.POST, request.FILES or None)
 
     if form.is_valid() and request.method == "POST":
@@ -120,7 +120,7 @@ def edit_item(request, id):
     return render(request, "edit_item.html", context)
 
 def get_item_json(request):
-    items_item = Item.objects.all()
+    items_item = Item.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize('json', items_item))
 
 @csrf_exempt
