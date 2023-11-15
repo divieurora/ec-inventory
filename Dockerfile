@@ -29,4 +29,4 @@ RUN chown -R django:django /app
 USER django
 
 # Run application
-# CMD gunicorn inventory.wsgi:application
+CMD gunicorn inventory.wsgi:application
