@@ -6,3 +6,4 @@ requests
 urllib3
 django-environ
 Pillow==10.0.1
+django-cors-headers
